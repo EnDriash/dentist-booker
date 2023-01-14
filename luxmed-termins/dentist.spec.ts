@@ -17,9 +17,14 @@ test("dentist", async ({ page }) => {
     .locator("#parent_4")
     .getByText("Higienistka stomatologiczna")
     .click();
+  console.log('Wybierz placowke')
   await page.getByPlaceholder('Dowolna placówka').click();
-  await page.getByText('ul. Wadowicka 7').click();
+  await page.getByRole('listitem').filter({ hasText: 'ul. Wadowicka 7' }).click();
+  console.log('Wybor placowki')
+  await page.locator('#facilities > .position-relative > .dropdown-chevron-click-area').click();
+  console.log('Po wyborze placowki')
   await page.getByRole("button", { name: "Szukaj" }).click();
+  console.log('Szukaj terminow')
   for (let day = 1; day <= 14; day++) {
     expect(
       await page
