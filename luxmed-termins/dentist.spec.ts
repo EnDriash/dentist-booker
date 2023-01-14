@@ -17,6 +17,8 @@ test("dentist", async ({ page }) => {
     .locator("#parent_4")
     .getByText("Higienistka stomatologiczna")
     .click();
+  await page.getByPlaceholder('Dowolna placówka').click();
+  await page.getByText('ul. Wadowicka 7').click();
   await page.getByRole("button", { name: "Szukaj" }).click();
   for (let day = 1; day <= 14; day++) {
     expect(
