@@ -46,3 +46,11 @@ jobs:
           export REPORT=$(node -e 'console.log(require("./test-results.json").suites.map(suite => suite.specs[0]).filter(spec => !spec.ok).map(spec => spec.title).join(","))')
           echo $REPORT
           echo "::set-output name=REPORT::$REPORT"
+      - name: Notification Slack
+        uses: rtCamp/action-slack-notify@v2
+        env:
+          SLACK_CHANNEL: ci
+          SLACK_TITLE: LuxMed Termin
+          SLACK_USERNAME: BotCI
+          SLACK_WEBHOOK: ${{ secrets.SLACK_WEBHOOK_URL }}
+          SLACK_MESSAGE: "Yoyo yo jest nowy termin w luxmedzie rusz dupe i sie zapisz"
