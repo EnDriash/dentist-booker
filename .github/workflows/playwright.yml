@@ -50,7 +50,7 @@ jobs:
           echo "::set-output name=REPORT::$REPORT"
         continue-on-error: true
       - name: Notification Slack
-        if: failure()
+        if: success()
         uses: rtCamp/action-slack-notify@v2
         env:
           SLACK_CHANNEL: ci
