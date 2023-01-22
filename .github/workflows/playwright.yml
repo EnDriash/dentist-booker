@@ -40,7 +40,6 @@ jobs:
           LUXMED_LOGIN_KID: ${{ secrets.LUXMED_LOGIN_KID }}
           LUXMED_PASSWORD_KID: ${{ secrets.LUXMED_PASSWORD_KID }}
         run: npx playwright test
-        continue-on-error: true
       - name: Extract failed names
         if: failure()
         id: report
@@ -48,7 +47,6 @@ jobs:
           export REPORT=$(node -e 'console.log(require("./test-results.json").suites.map(suite => suite.specs[0]).filter(spec => !spec.ok).map(spec => spec.title).join(","))')
           echo $REPORT
           echo "::set-output name=REPORT::$REPORT"
-        continue-on-error: true
       - name: Notification Slack
         if: failure()
         uses: rtCamp/action-slack-notify@v2
